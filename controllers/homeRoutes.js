@@ -1,14 +1,17 @@
-const router = require('express').Router();
-
+const router = require("express").Router();
 // get route for home page
-router.get('/', async (req, res) => { 
-    try {
-      // Get all projects and JOIN with user data
-    //   res is related to handlebars 
-      res.render('homepage');
-    } catch (err) {
-      res.status(500).json(err);
+router.get("/", async (req, res) => {
+  try {
+    //   res is related to handlebars
+    // if user is already logged in
+    if(req.session.loggedIn) {
+        res.render('homepage');
     }
-  });
-
-  module.exports = router;
+    else {
+    res.render("login");
+}
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+module.exports = router;
