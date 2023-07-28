@@ -1,0 +1,10 @@
+[
+    {
+      "title": "NoteTitle",
+      "note": "How to code"
+    },
+    {
+        "title": "NoteTitle2",
+        "note": "How to code with express"
+    }
+  ]
