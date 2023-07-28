@@ -27,6 +27,7 @@
     "express-session": "^1.17.3",
     "mysql2": "^3.5.2",
     "prettier": "^3.0.0",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "trix": "^2.0.5"
   }
 }
