@@ -26,8 +26,12 @@
     "express-handlebars": "^7.1.0",
     "express-session": "^1.17.3",
     "mysql2": "^3.5.2",
-    "prettier": "^3.0.0",
     "sequelize": "^6.32.1",
     "trix": "^2.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.9.0",
+    "prettier": "^3.0.0"
   }
 }
