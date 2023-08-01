@@ -22,21 +22,20 @@ UserNotes.init(
       unique: false,
     },
     user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
     },
   },
   {
-    
     sequelize,
     timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'UserNotes',
-  }
+  },
 );
 
 module.exports = UserNotes;
