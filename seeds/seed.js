@@ -1,3 +1,4 @@
+require('dotenv').config();
 const sequelize = require('../config/connection');
 const { User, UserNotes } = require('../models');
 
