@@ -58,10 +58,97 @@ router.post('/logout', (req, res) => {
   }
 });
 
-module.exports = router;
 
 
 // add note routes
+// get notes
+router.get('/notes/:id', async (req, res) => {
+  try {
+    const noteId = req.params.id;
+
+    // Ensure the user is logged in to get the note (you can modify this as per your authentication mechanism)
+    if (!req.session.logged_in) {
+      res.status(401).json({ message: 'You must be logged in to get a note.' });
+      return;
+    }
+
+    const note = await Note.findByPk(noteId);
+
+    // Check if the note exists
+    if (!note) {
+      res.status(404).json({ message: 'Note not found.' });
+      return;
+    }
+
+    // Check if the logged-in user owns the note
+    if (note.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to get this note.' });
+      return;
+    }
+
+    res.status(200).json(note);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 // new note(post)
+router.post('/notes', async (req, res) => {
+  try {
+    const { title, content } = req.body;
+
+    // Ensure the user is logged in to create a note (you can modify this as per your authentication mechanism)
+    if (!req.session.logged_in) {
+      res.status(401).json({ message: 'You must be logged in to create a note.' });
+      return;
+    }
+
+    const newNote = await Note.create({
+      title,
+      content,
+      user_id: req.session.user_id, // Associate the note with the logged-in user
+    });
+
+    res.status(201).json(newNote);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 // update note route (put)
-// delete note (delete)
+router.put('/notes/:id', async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const noteId = req.params.id;
+
+    // Ensure the user is logged in to update the note (you can modify this as per your authentication mechanism)
+    if (!req.session.logged_in) {
+      res.status(401).json({ message: 'You must be logged in to update a note.' });
+      return;
+    }
+
+    const note = await Note.findByPk(noteId);
+
+    // Check if the note exists
+    if (!note) {
+      res.status(404).json({ message: 'Note not found.' });
+      return;
+    }
+
+    // Check if the logged-in user owns the note
+    if (note.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to update this note.' });
+      return;
+    }
+
+    // Update the note
+    note.title = title;
+    note.content = content;
+    await note.save();
+
+    res.status(200).json(note);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+module.exports = router;
