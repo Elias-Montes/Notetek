@@ -58,17 +58,18 @@ router.post('/logout', (req, res) => {
   }
 });
 
-
 // delete note route
 router.delete('/notes/:id', async (req, res) => {
   try {
     const noteId = req.params.id;
 
     if (!req.session.logged_in) {
-      res.status(401).json({ message: 'You must be logged in to delete a note.' });
+      res
+        .status(401)
+        .json({ message: 'You must be logged in to delete a note.' });
       return;
     }
-    
+
     if (!noteId) {
       res.status(404).json({ message: 'Note not found.' });
       return;
@@ -78,15 +79,15 @@ router.delete('/notes/:id', async (req, res) => {
     //   res.status(403).json({ message: 'You are not authorized to delete this note.' });
     //   return;
     // }
-    
+
     const deleteNote = await Note.destroy({
-      where: {id:noteId}
+      where: { id: noteId },
     });
     res.status(201).json(deleteNote);
-    } catch (err) {
-      console.log(err)
-      res.status(400).json(err);
-    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
 });
 
 // get notes
@@ -110,7 +111,9 @@ router.get('/notes/:id', async (req, res) => {
 
     // Check if the logged-in user owns the note
     if (note.user_id !== req.session.user_id) {
-      res.status(403).json({ message: 'You are not authorized to get this note.' });
+      res
+        .status(403)
+        .json({ message: 'You are not authorized to get this note.' });
       return;
     }
 
@@ -126,7 +129,9 @@ router.post('/notes', async (req, res) => {
 
     // Ensure the user is logged in to create a note (you can modify this as per your authentication mechanism)
     if (!req.session.logged_in) {
-      res.status(401).json({ message: 'You must be logged in to create a note.' });
+      res
+        .status(401)
+        .json({ message: 'You must be logged in to create a note.' });
       return;
     }
 
@@ -138,7 +143,7 @@ router.post('/notes', async (req, res) => {
 
     res.status(201).json(newNote);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(400).json(err);
   }
 });
@@ -151,7 +156,9 @@ router.put('/notes/:id', async (req, res) => {
 
     // Ensure the user is logged in to update the note (you can modify this as per your authentication mechanism)
     if (!req.session.logged_in) {
-      res.status(401).json({ message: 'You must be logged in to update a note.' });
+      res
+        .status(401)
+        .json({ message: 'You must be logged in to update a note.' });
       return;
     }
 
@@ -165,7 +172,9 @@ router.put('/notes/:id', async (req, res) => {
 
     // Check if the logged-in user owns the note
     if (note.user_id !== req.session.user_id) {
-      res.status(403).json({ message: 'You are not authorized to update this note.' });
+      res
+        .status(403)
+        .json({ message: 'You are not authorized to update this note.' });
       return;
     }
 

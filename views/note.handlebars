@@ -3,37 +3,28 @@
 <!-- Modal for creating/editing notes -->
 <div id="note-modal">
     <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h4>Create/Edit Note</h4>
+        {{!-- <span class="close-btn">&times;</span> --}}
+        <h4>Create <br> <span style="font-size: smaller; color: green;">update</span></h4>
         <input type="text" id="note-title" placeholder="Note Title">
         <textarea id="note-content" placeholder="Note Content"></textarea>
-        <button id="save-note-btn">Save</button>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save</button>
     </div>
 </div>
 
 <!-- Modal for sharing notes via username -->
 <div id="share-username-modal">
     <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        {{!-- <span class="close-btn">&times;</span> --}}
         <h2>Share via Username</h2>
         <input type="text" id="username" placeholder="Follower's Username">
-        <button id="share-username-btn">Share</button>
-    </div>
-</div>
-
-<div id="logout-username">
-    <div class="modal-content">
-        <span class="logout-btn">&times;</span>
-        <h2>LogOut</h2>
-        <input type="text" id="username" placeholder="Follower's Username">
-        <button id="logout-btn">Logout</button>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Share</button>
     </div>
 </div>
 
 <!-- Modal for sharing notes via QR code -->
 <div id="share-qr-modal">
     <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        {{!-- <span class="close-btn">&times;</span> --}}
         <h2>Share via QR Code</h2>
         <div id="qr-code">
             
@@ -41,6 +32,18 @@
     </div>
 </div>
 
+
+</div>
+
+<footer>
+    <div id="logout-username">
+    <div class="modal-content">
+        {{!-- <span class="logout-btn">&times;</span> --}}
+        {{!-- <h2>LogOut</h2> --}}
+        {{!-- <input type="text" id="username" placeholder="Follower's Username"> --}}
+        <button class="btn waves-effect waves-red" type="submit" name="action">Logout</button>
+    </div>
+</footer>
 
 <script>
         
