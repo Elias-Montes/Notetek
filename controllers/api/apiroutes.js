@@ -1,6 +1,6 @@
 // user routes that will allow you to create new accounts/get user
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Note } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
@@ -69,23 +69,22 @@ router.delete('/notes/:id', async (req, res) => {
       return;
     }
     
-    if (!note) {
+    if (!noteId) {
       res.status(404).json({ message: 'Note not found.' });
       return;
     }
 
-    if (note.user_id !== req.session.user_id) {
-      res.status(403).json({ message: 'You are not authorized to delete this note.' });
-      return;
-    }
+    // if (note.user_id !== req.session.user_id) {
+    //   res.status(403).json({ message: 'You are not authorized to delete this note.' });
+    //   return;
+    // }
     
-    const deleteNote = await Note.delete({
-      title,
-      content,
-      user_id: req.session.user_id,
+    const deleteNote = await Note.destroy({
+      where: {id:noteId}
     });
     res.status(201).json(deleteNote);
     } catch (err) {
+      console.log(err)
       res.status(400).json(err);
     }
 });
@@ -123,7 +122,7 @@ router.get('/notes/:id', async (req, res) => {
 // new note(post)
 router.post('/notes', async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, note } = req.body;
 
     // Ensure the user is logged in to create a note (you can modify this as per your authentication mechanism)
     if (!req.session.logged_in) {
@@ -133,12 +132,13 @@ router.post('/notes', async (req, res) => {
 
     const newNote = await Note.create({
       title,
-      content,
+      note,
       user_id: req.session.user_id, // Associate the note with the logged-in user
     });
 
     res.status(201).json(newNote);
   } catch (err) {
+    console.log(err)
     res.status(400).json(err);
   }
 });
