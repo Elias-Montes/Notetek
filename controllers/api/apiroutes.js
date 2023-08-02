@@ -59,8 +59,37 @@ router.post('/logout', (req, res) => {
 });
 
 
+// delete note route
+router.delete('/notes/:id', async (req, res) => {
+  try {
+    const noteId = req.params.id;
 
-// add note routes
+    if (!req.session.logged_in) {
+      res.status(401).json({ message: 'You must be logged in to delete a note.' });
+      return;
+    }
+    
+    if (!note) {
+      res.status(404).json({ message: 'Note not found.' });
+      return;
+    }
+
+    if (note.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to delete this note.' });
+      return;
+    }
+    
+    const deleteNote = await Note.delete({
+      title,
+      content,
+      user_id: req.session.user_id,
+    });
+    res.status(201).json(deleteNote);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+});
+
 // get notes
 router.get('/notes/:id', async (req, res) => {
   try {
