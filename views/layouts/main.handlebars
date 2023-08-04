@@ -6,26 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>NoteTek</title>
-  <link rel="stylesheet" href="/public/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+      <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
 </head>
-<body>
+<body class="card-panel green lighten-5">
+  <div class="container">
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
-      <h1>
+      <h1 class="center-align">
         <span role="img" aria-label="Memo">📝</span>
         <a href="/">NoteTek</a>
       </h1>
-      <nav>
+      {{!-- <nav>
         
         {{#if logged_in}}
         <a href="/profile">profile</a> |
         <button class="no-button" id="logout">logout</button>
         {{else}}
-        <a href="/login">login</a>
+        <a href="/login">Login</a>
         {{/if}}
 
-      </nav>
+      </nav> --}}
     </header>
     <main class="container container-fluid mt-5">
     
@@ -37,8 +42,12 @@
   </div>
 
   {{#if logged_in}}
-  <script src="/public/jss/logout.js"></script>
+  <script src="/jss/logout.js"></script>
   {{/if}}
+
+      <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</div>
 </body>
 
 </html>
