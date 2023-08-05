@@ -83,7 +83,7 @@ $(document).ready(function () {
     // Edit a note when clicking the "Edit" button
     $(document).on("click", ".edit-btn", function () {
         const noteId = $(this).closest(".note").attr("data-note-id");
-        const title = $(this).siblings("h3").text();
+        const title = $(this).siblings("h4").text();
         const content = $(this).siblings("p").text();
         showNoteModal(title, content, noteId);
     });
