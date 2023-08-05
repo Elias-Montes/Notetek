@@ -3,6 +3,7 @@
 // delete note
 
 $(document).ready(function () {
+        $('.modal').modal();
     // Function to show the create/edit note modal
     function showNoteModal(title, content, noteId) {
         $("#note-title").val(title);
@@ -57,7 +58,8 @@ $(document).ready(function () {
     });
 
     // Save the note when clicking the "Save" button in the note modal
-    $("#save-note-btn").click(function () {
+    $("#save-note").submit(function (event) {
+        event.preventDefault();
         const noteId = $(this).attr("data-note-id");
         const title = $("#note-title").val();
         const content = $("#note-content").val();
@@ -65,9 +67,9 @@ $(document).ready(function () {
         // Calling jQuery API to save/update the note
         
         $.ajax({
-            url: `/api/notes/${noteId}`,
+            url: `/api/user/notes/`,
             method: noteId ? "PUT" : "POST",
-            data: { title: title, content: content },
+            data: { title: title, note: content },
             success: function (data) {
                 hideModals();
                 location.reload(); // Refresh the page to display updated notes

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Note } = require('../models');
 // get route for home page
 router.get('/', async (req, res) => {
   try {
@@ -15,8 +16,16 @@ router.get('/', async (req, res) => {
 });
 router.get('/note', async (req, res) => {
   try {
+    const noteData = await Note.findAll({
+      where: {user_id:req.session.user_id}
+    });
+    const userNotes = noteData.map((notes) => notes.get({ plain: true }));
+    console.log(userNotes)
     if (req.session.logged_in) {
-      res.render('note');
+      res.render('note', {
+        userNotes,
+        logged_in: req.session.logged_in
+      });
     } else {
       res.render('login');
     }

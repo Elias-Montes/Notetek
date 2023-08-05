@@ -1,37 +1,49 @@
 <h3>My Notes</h3>
 
+{{#each userNotes as |note| }}
+<p>{{note.title}}</p>
+{{/each}}
+
+<a class="waves-effect waves-light btn modal-trigger" href="#note-modal">New Note</a>
 <!-- Modal for creating/editing notes -->
-<div id="note-modal">
+<div id="note-modal" class="modal">
     <div class="modal-content">
+        <form id="save-note">
         {{!-- <span class="close-btn">&times;</span> --}}
         <h4>Create <br> <span style="font-size: smaller; color: green;">update</span></h4>
         <input type="text" id="note-title" placeholder="Note Title">
-        <textarea id="note-content" placeholder="Note Content"></textarea>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Save</button>
+        {{!-- <textarea id="note-content" placeholder="Note Content"></textarea> --}}
+        
+        <input id="note-content" type="hidden" name="content">
+        <trix-editor input="note-content"></trix-editor>
+
+        <button class="btn waves-effect waves-light" id="save-note-btn" type="submit" name="action">Save</button>
+        </form>
     </div>
 </div>
 
-<!-- Modal for sharing notes via username -->
-<div id="share-username-modal">
+<!--<a class="waves-effect waves-light btn modal-trigger" href="#share-username-modal">Share Username</a>
+ Modal for sharing notes via username
+<div id="share-username-modal" class="modal">
     <div class="modal-content">
-        {{!-- <span class="close-btn">&times;</span> --}}
+        <span class="close-btn">&times;</span>
         <h2>Share via Username</h2>
         <input type="text" id="username" placeholder="Follower's Username">
         <button class="btn waves-effect waves-light" type="submit" name="action">Share</button>
     </div>
-</div>
+</div> -->
 
-<!-- Modal for sharing notes via QR code -->
-<div id="share-qr-modal">
+<!--<a class="waves-effect waves-light btn modal-trigger" href="#share-qr-modal">Share QR</a>
+ Modal for sharing notes via QR code 
+<div id="share-qr-modal" class="modal">
     <div class="modal-content">
-        {{!-- <span class="close-btn">&times;</span> --}}
+        <span class="close-btn">&times;</span>
         <h2>Share via QR Code</h2>
         <div id="qr-code">
             
         </div>
     </div>
-</div>
-
+</div>-->
 
 </div>
 
@@ -45,8 +57,8 @@
     </div>
 </footer>
 
-<script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script> // Library for generating QR codes 
-</script>
-<script src="./jss/logout.js"></script>
+
+<script src="./js/logout.js"></script>
+<script src="/js/note.js"></script>
