@@ -1,7 +1,14 @@
-<h3>My Notes</h3>
+<h3 style="color:rgb(0, 183, 255)">My Notes</h3>
 
 {{#each userNotes as |note| }}
-<p>{{note.title}}</p>
+<form>
+    <div class="note">
+        <h4>{{note.title}}</h4>
+        <p>{{{note.note}}}</p>
+        <button class="edit-note-btn waves-effect waves-light btn-small edit-btn" data-note-id="{{note.id}}">Edit</button>
+        <button class="edit-note-btn waves-effect waves-light btn-small delete-btn" data-note-id="{{note.id}}">Delete</button>
+    </div>
+</form>
 {{/each}}
 
 <a class="waves-effect waves-light btn modal-trigger" href="#note-modal">New Note</a>
@@ -10,7 +17,7 @@
     <div class="modal-content">
         <form id="save-note">
         {{!-- <span class="close-btn">&times;</span> --}}
-        <h4>Create <br> <span style="font-size: smaller; color: green;">update</span></h4>
+        <h4>Create</h4>
         <input type="text" id="note-title" placeholder="Note Title">
         {{!-- <textarea id="note-content" placeholder="Note Content"></textarea> --}}
         
@@ -22,6 +29,26 @@
     </div>
 </div>
 
+</div>
+<footer>
+    <div id="logout-username">
+    <div class="modal-content">
+        {{!-- <span class="logout-btn">&times;</span> --}}
+        {{!-- <h2>LogOut</h2> --}}
+        {{!-- <input type="text" id="username" placeholder="Follower's Username"> --}}
+        <button class="btn waves-effect waves-red" id="logout" type="submit" name="action">Logout</button>
+    </div>
+    
+</footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>  <!--Library for generating QR codes-->
+
+<script src="./js/logout.js"></script>
+<script src="/js/note.js"></script>
+
+
+{{!-- Future Ideas --}}
 <!--<a class="waves-effect waves-light btn modal-trigger" href="#share-username-modal">Share Username</a>
  Modal for sharing notes via username
 <div id="share-username-modal" class="modal">
@@ -44,21 +71,3 @@
         </div>
     </div>
 </div>-->
-
-</div>
-
-<footer>
-    <div id="logout-username">
-    <div class="modal-content">
-        {{!-- <span class="logout-btn">&times;</span> --}}
-        {{!-- <h2>LogOut</h2> --}}
-        {{!-- <input type="text" id="username" placeholder="Follower's Username"> --}}
-        <button class="btn waves-effect waves-red" id="logout" type="submit" name="action">Logout</button>
-    </div>
-</footer>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script> // Library for generating QR codes 
-
-<script src="./js/logout.js"></script>
-<script src="/js/note.js"></script>
